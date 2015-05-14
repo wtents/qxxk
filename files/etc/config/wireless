@@ -1,0 +1,32 @@
+config wifi-device  wifi0
+	option type	qcawifi
+	option channel	auto
+	option macaddr	00:03:7f:48:83:b6
+	option hwmode	11ng
+	option disabled 0
+	option regdomain US
+	option country  840
+
+config wifi-iface
+	option device	wifi0
+	option network	lan
+	option mode	ap
+	option ssid	IWF503_11ng
+	option encryption none
+
+config wifi-device  wifi1
+	option type	qcawifi
+	option channel	auto
+	option macaddr	00:10:f3:45:78:22
+	option hwmode	11ac
+	option disabled 0
+	option regdomain US
+	option country  840
+
+config wifi-iface
+	option device	wifi1
+	option network	lan
+	option mode	ap
+	option ssid	IWF503_11ac
+	option encryption none
+
