@@ -1,0 +1,10 @@
+#!/bin/sh
+
+[ "${ACTION}" = "pressed" ] && {
+	echo "RESET press" > /dev/console
+	echo "RESET press" >> /tmp/button_test
+}
+[ "${ACTION}" = "released" ] && {
+	echo "RESET release" > /dev/console
+	echo "RESET release" >> /tmp/button_test
+}

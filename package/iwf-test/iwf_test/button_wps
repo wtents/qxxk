@@ -1,0 +1,10 @@
+#!/bin/sh
+
+[ "${ACTION}" = "pressed" ] && {
+	echo "WPS press" > /dev/console
+	echo "WPS press" >> /tmp/button_test
+}
+[ "${ACTION}" = "released" ] && {
+	echo "WPS release" > /dev/console
+	echo "WPS release" >> /tmp/button_test
+}
