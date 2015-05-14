@@ -1,0 +1,57 @@
+From 7bcbc9a8fbb0fd90a6be1bb25ba5c168e4e10357 Mon Sep 17 00:00:00 2001
+From: Mohammmed Shafi Shajakhan <mohammed@qti.qualcomm.com>
+Date: Mon, 27 Jan 2014 13:36:03 +0530
+Subject: [PATCH 3/3] [art2] Fix-crash-insmod-art-for-offload-chipset.patch
+
+Signed-off-by: Mohammmed Shafi Shajakhan <mohammed@qti.qualcomm.com>
+---
+ driver/linux/makefile.artmod |    4 ++++
+ driver/linux/modules/main.c  |   10 ++++++++++
+ 2 files changed, 14 insertions(+), 0 deletions(-)
+
+diff --git a/driver/linux/makefile.artmod b/driver/linux/makefile.artmod
+index 8cbc49c..f021f14 100644
+--- a/driver/linux/makefile.artmod
++++ b/driver/linux/makefile.artmod
+@@ -25,6 +25,10 @@ default:
+ 	@echo Making generic AP art module build. This build target is used for 3rd party AP processor. 
+ 	make ARCH=$(ARC) PB42=1 DEBUG=$(DEBUG) CROSS_COMPILE=$(CROSS_CC) -C $(KDIR) M=$(PWD)/modules modules
+ 
++akronite:
++	@echo Making Akronite AP art module build.
++	make ARCH=$(ARC) PB42=1 DEBUG=$(DEBUG) CROSS_COMPILE=$(CROSS_CC) -C $(KDIR) M=$(PWD)/modules modules
++
+ hydra:
+ 	@echo Making art module for Atheros hydra based design.
+ 	make ARCH=$(ARC) PB42=1 DEBUG=$(DEBUG) CROSS_COMPILE=$(CROSS_CC) -C $(KDIR) M=$(PWD)/modules modules
+diff --git a/driver/linux/modules/main.c b/driver/linux/modules/main.c
+index e7b1757..145702f 100644
+--- a/driver/linux/modules/main.c
++++ b/driver/linux/modules/main.c
+@@ -150,6 +150,11 @@ static INT32 __init dk_module_init(void)
+  	VOID *dev;
+ #endif
+ 
++#ifdef AKRONITE_ART
++		printk("Akronite ART: bailing out gracefully\n");
++		return 0;
++#endif
++
+ #if  !defined(P1020)
+ #if  defined(PYTHON_EMU)
+         	UINT32 *addr;
+@@ -341,6 +346,11 @@ if (add_client(dev,(A_UINT_PTR *)baseaddr,len,irq, numBars, sIndex,0) < 0) {
+ 
+ static void __exit  dk_module_exit(void)
+ {
++#ifdef AKRONITE_ART
++		printk("Akronite ART bail out gracefully\n");
++		return 0;
++#endif
++
+ #ifdef DK_DEBUG
+ 		printk("DK::Module exit \n");
+ #endif // DK_DEBUG
+-- 
+1.7.8.3
+

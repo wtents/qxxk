@@ -1,0 +1,26 @@
+From fc6b84a5012fe2d3c916f9cd0b348be253000662 Mon Sep 17 00:00:00 2001
+From: Mohammmed Shafi Shajakhan <mohammed@qti.qualcomm.com>
+Date: Mon, 27 Jan 2014 13:26:42 +0530
+Subject: [PATCH 2/3] [art2] use-ggdb3-debug-format
+
+Signed-off-by: Mohammmed Shafi Shajakhan <mohammed@qti.qualcomm.com>
+---
+ makefile.nart |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/makefile.nart b/makefile.nart
+index 2de5474..52d8784 100644
+--- a/makefile.nart
++++ b/makefile.nart
+@@ -41,7 +41,7 @@ endif
+ CFLAGS += -Os
+ 
+ ifeq ($(GDB),1)
+-    CFLAGS += -g
++    CFLAGS += -ggdb3
+ endif
+ 
+ OUTPUT_DIR=nartbuild
+-- 
+1.7.8.3
+
